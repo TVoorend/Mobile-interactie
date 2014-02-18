@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Acceleration Example</title>
+    <style src="static/style.css"></style>
+    <script type="text/javascript" src="static/app.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script src="http://debug-software.intel.com/target/target-script-min.js#-NpGaW3uC9UIjJHMFp1fLCYytTMocdJADKoNGqBzjqY"></script>
+  </head>
+  <body>
+    <div id="accelerometer" style="display:none;"></div>
+    <div class="playground">
+          <svg height="800px" width="100%">
+              <circle class="circle" cx="30" cy="30" r="20" stroke="black" stroke-width="1" fill="red" />
+          </svg>
+      </div>
+      <p><a href="#" onclick="app.vibrate.showAlert(); return false;">Show Alert</a></p>
+      <p><a href="#" onclick="app.vibrate.vibrate(); return false;">Vibrate</a></p>
+  </body>
+</html>

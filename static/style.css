@@ -1,0 +1,12 @@
+        /* Prevent copy paste for all elements except text fields */
+        *  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
+        input, textarea  { -webkit-user-select:text; }
+        body { background-color:white; color:black }
+        .playground { 
+         background-color:#eee;
+         height: 800px;
+         width: 100%;
+        }
+        #accelerometer {
+        display: none;
+        }
