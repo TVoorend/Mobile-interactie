@@ -5,7 +5,6 @@ var app = app || {};
 
     // The watch id references the current `watchAcceleration`
     var watchID = null;
-    // Wait for device API libraries to load
 
     app.acceleration = {
     // device APIs are available
@@ -19,9 +18,9 @@ var app = app || {};
     startWatch: function() {
 
         // Update acceleration every 3 seconds
-        var options = { frequency: 2 };
+        var options = { frequency: 20 };
 
-        watchID = navigator.accelerometer.watchAcceleration(app.acceleration.onSuccess, app.acceleration.onError, options);
+        watchID = navigator.accelerometer.watchAcceleration(app.acceleration.onSuccess,                 app.acceleration.onError, options);
     },
 
     // Stop watching the acceleration
@@ -43,42 +42,67 @@ var app = app || {};
                             'Timestamp: '      + acceleration.timestamp + '<br />';
 
         var xRichting = acceleration.x;
-        var xR = -xRichting*45 + 290;
+        var xR = -xRichting*45 + 200;
         $(".circle").attr("cx", xR);
-        // console.log(xR);
+
 
         var yRichting = acceleration.y;
         var yR = yRichting*50 + 400;
         $(".circle").attr("cy", yR);
-        // console.log(yR);
 
-       // if (yR > 300.0000000000000) {
-       //     app.vibrate.vibrate();
-       // }
+         
+         if (xR > 435 ) {
+             app.vibrate.vibrate();
+         }
+         
+        else if (xR < 65 ) {
+             app.vibrate.vibrate();
+         }
+         
+         else if (yR > 640 ) {
+             app.vibrate.vibrate();
+         }
+         
+         else if (yR < 100 ) {
+             app.vibrate.vibrate();
+             
+         }
+         else {
+             $(".playground").removeClass('red');
+             $("#titel").addClass('animated bounceIn');
+         }
+
     },
 
     // onError: Failed to get the acceleration
     //
-    onError: function() {
-        alert('onError!');
+        onError: function() {
+            alert('onError!');
     },
 };
-
+    
     app.vibrate = {
-            showAlert: function() {
-                navigator.notification.alert(
-                    'You are the winner!',  // message
-                    'Game Over',            // title
-                    'Done'                  // buttonName
-                );
-            },
+        
+        
+            vibrate: function() {
+            navigator.notification.vibrate(100);
+            app.animation.titelAnimation();  
+            app.animation.bgAnimation();  
+            console.log("vibrate");
+        }
 
-            // Vibrate for 2 seconds
-            //
-//            vibrate: function() {
-//                navigator.notification.vibrate(2000);
-//            }
-
+    };
+    
+    app.animation = {
+            
+            titelAnimation: function() {
+                $("#titel").removeClass('animated bounceIn');
+                console.log("titel bounce");
+        },
+        
+            bgAnimation: function() {
+                $(".playground").addClass('red');
+        }
     };
 
     app.controller = {
@@ -87,6 +111,9 @@ var app = app || {};
         }
     };
 
-    app.controller.init();
+    $( document ).ready(function() {
+        app.controller.init();
+    });
+    
 
 })();
